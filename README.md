@@ -1,23 +1,23 @@
 # 🌐 Web Traffic Forecasting Project
 
-A web traffic forecasting system that compares **LSTM (Long Short-Term Memory)** and **ARIMA** models to predict website user traffic patterns. This project demonstrates both traditional statistical methods and modern deep learning approaches for time series forecasting.
+A web traffic forecasting system that compares **Random Forest (LSTM alternative)** and **ARIMA** models to predict website user traffic patterns. This project demonstrates both traditional statistical methods and modern machine learning approaches for time series forecasting.
 
 ## 🎯 Project Overview
 
 This project implements a time series forecasting pipeline that:
 
 1. **Analyzes web traffic data** with time series visualization
-2. **Trains two different models**: LSTM (deep learning) and ARIMA (statistical)
+2. **Trains two different models**: Random Forest (machine learning) and ARIMA (statistical)
 3. **Compares model performance** using RMSE metrics
 4. **Generates predictions** and visualizations
 5. **Provides interactive dashboard** through Streamlit
 
 ## 🏆 Key Findings
 
-**LSTM typically performs better than ARIMA** for web traffic forecasting because:
-- LSTM can capture complex non-linear patterns in the data
-- It handles seasonality and trends more effectively
-- Deep learning models excel at learning from historical patterns
+**ARIMA typically performs better than Random Forest** for this web traffic forecasting because:
+- ARIMA is specifically designed for time series data
+- It handles trends and seasonality more effectively
+- Traditional statistical methods can be more reliable for certain patterns
 
 ## 📊 Features
 
@@ -27,7 +27,7 @@ This project implements a time series forecasting pipeline that:
 - ✅ **Model Comparison**: Side-by-side performance evaluation
 
 ### Model Implementation
-- ✅ **LSTM Model**: Deep learning approach with dropout layers and early stopping
+- ✅ **Random Forest Model**: Machine learning approach with feature engineering
 - ✅ **ARIMA Model**: Traditional statistical method with automatic parameter selection
 - ✅ **Feature Engineering**: Time-based features, lags, and rolling averages
 - ✅ **Future Forecasting**: Predictions for test data
@@ -68,7 +68,7 @@ web-traffic-forecasting/
     ├── config.py                 # Configuration settings
     ├── data.py                   # Data loading and preprocessing
     ├── analysis.py               # Time series analysis functions
-    ├── lstm.py                   # LSTM model implementation
+    ├── lstm.py                   # Random Forest model implementation
     ├── arima.py                  # ARIMA model implementation
     ├── train_and_forecast.py     # Main training pipeline
     └── utils.py                  # Utility functions
@@ -102,11 +102,10 @@ RANDOM_SEED: int = 42          # For reproducibility
 
 ## 📊 Model Details
 
-### LSTM Model
-- **Architecture**: 2 LSTM layers (64, 32 units) with dropout
-- **Optimizer**: Adam with early stopping
-- **Features**: MinMax scaling, sequence creation
-- **Strengths**: Captures complex patterns, handles non-linearity
+### Random Forest Model
+- **Algorithm**: Random Forest Regressor with 100 trees
+- **Features**: Time index, lag features, rolling averages, day of week
+- **Strengths**: Captures non-linear patterns, handles multiple features
 
 ### ARIMA Model
 - **Method**: Automatic parameter selection (p, d, q)
@@ -119,26 +118,25 @@ RANDOM_SEED: int = 42          # For reproducibility
 1. **Data Generation**: Create sample web traffic data with trend and seasonality
 2. **Data Visualization**: Plot time series and show statistics
 3. **Feature Engineering**: Create time-based features and lags
-4. **Model Training**: Train LSTM and ARIMA models
+4. **Model Training**: Train Random Forest and ARIMA models
 5. **Performance Comparison**: Calculate RMSE and show results
 6. **Visualization**: Display predictions vs actual values
 
 ## 📊 Expected Results
 
 The project typically shows that:
-- **LSTM achieves lower RMSE** than ARIMA
-- **Deep learning captures complex patterns** better than statistical methods
+- **ARIMA achieves lower RMSE** than Random Forest
+- **Statistical methods can be more reliable** for certain time series patterns
 - **Feature engineering** significantly improves model performance
 
 ## 🛠️ Technical Requirements
 
 - Python 3.8+
-- TensorFlow 2.15+
+- Scikit-learn 1.5+
 - Statsmodels 0.14+
 - Streamlit 1.37+
 - Pandas 2.2+
 - NumPy 1.26+
-- Scikit-learn 1.5+
 - Plotly 5.22+
 - Matplotlib 3.9+
 
@@ -165,5 +163,3 @@ Feel free to contribute by:
 This project is open source and available under the MIT License.
 
 ---
-
-**Built with ❤️ for time series forecasting and machine learning education**

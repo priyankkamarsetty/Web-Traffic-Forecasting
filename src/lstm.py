@@ -37,6 +37,8 @@ def fit_lstm(train_series: pd.Series, test_series: pd.Series, time_steps: int = 
     # Create time-based features
     def create_features(series):
         features = []
+        max_features = 6  # Maximum number of features we'll create
+        
         for i in range(len(series)):
             feature_row = []
             # Time index
@@ -44,17 +46,32 @@ def fit_lstm(train_series: pd.Series, test_series: pd.Series, time_steps: int = 
             # Day of week (if we have enough data)
             if len(series) > 7:
                 feature_row.append(i % 7)
+            else:
+                feature_row.append(0)
             # Rolling averages
             if i >= 3:
                 feature_row.append(series.iloc[i-3:i].mean())
+            else:
+                feature_row.append(series.iloc[:i+1].mean() if i > 0 else series.iloc[0])
             if i >= 7:
                 feature_row.append(series.iloc[i-7:i].mean())
+            else:
+                feature_row.append(series.iloc[:i+1].mean() if i > 0 else series.iloc[0])
             # Lag features
             if i >= 1:
                 feature_row.append(series.iloc[i-1])
+            else:
+                feature_row.append(series.iloc[0])
             if i >= 2:
                 feature_row.append(series.iloc[i-2])
-            features.append(feature_row)
+            else:
+                feature_row.append(series.iloc[0])
+            
+            # Ensure all rows have the same number of features
+            while len(feature_row) < max_features:
+                feature_row.append(0)
+            
+            features.append(feature_row[:max_features])
         return np.array(features)
     
     # Prepare training data

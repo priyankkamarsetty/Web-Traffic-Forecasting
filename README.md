@@ -1,23 +1,23 @@
 # 🌐 Web Traffic Forecasting Project
 
-A web traffic forecasting system that compares **Random Forest** and **Linear Regression** models to predict website user traffic patterns. This project demonstrates time series forecasting concepts with a simple, fast implementation.
+A web traffic forecasting system that compares **LSTM (Long Short-Term Memory)** and **ARIMA** models to predict website user traffic patterns. This project demonstrates both traditional statistical methods and modern deep learning approaches for time series forecasting.
 
 ## 🎯 Project Overview
 
 This project implements a time series forecasting pipeline that:
 
 1. **Analyzes web traffic data** with time series visualization
-2. **Trains two different models**: Random Forest and Linear Regression
+2. **Trains two different models**: LSTM (deep learning) and ARIMA (statistical)
 3. **Compares model performance** using RMSE metrics
 4. **Generates predictions** and visualizations
 5. **Provides interactive dashboard** through Streamlit
 
 ## 🏆 Key Findings
 
-**Random Forest typically performs better than Linear Regression** for web traffic forecasting because:
-- Random Forest can capture non-linear patterns in the data
-- It handles multiple features and interactions effectively
-- Machine learning models excel at learning from historical patterns
+**LSTM typically performs better than ARIMA** for web traffic forecasting because:
+- LSTM can capture complex non-linear patterns in the data
+- It handles seasonality and trends more effectively
+- Deep learning models excel at learning from historical patterns
 
 ## 📊 Features
 
@@ -27,8 +27,8 @@ This project implements a time series forecasting pipeline that:
 - ✅ **Model Comparison**: Side-by-side performance evaluation
 
 ### Model Implementation
-- ✅ **Random Forest Model**: Machine learning approach with feature engineering
-- ✅ **Linear Regression Model**: Traditional statistical method
+- ✅ **LSTM Model**: Deep learning approach with dropout layers and early stopping
+- ✅ **ARIMA Model**: Traditional statistical method with automatic parameter selection
 - ✅ **Feature Engineering**: Time-based features, lags, and rolling averages
 - ✅ **Future Forecasting**: Predictions for test data
 
@@ -68,7 +68,7 @@ web-traffic-forecasting/
     ├── config.py                 # Configuration settings
     ├── data.py                   # Data loading and preprocessing
     ├── analysis.py               # Time series analysis functions
-    ├── lstm.py                   # Random Forest model implementation
+    ├── lstm.py                   # LSTM model implementation
     ├── arima.py                  # ARIMA model implementation
     ├── train_and_forecast.py     # Main training pipeline
     └── utils.py                  # Utility functions
@@ -102,35 +102,39 @@ RANDOM_SEED: int = 42          # For reproducibility
 
 ## 📊 Model Details
 
-### Random Forest Model
-- **Algorithm**: Random Forest Regressor with 50-100 trees
-- **Features**: Time index, lag features, rolling averages, day of week
-- **Strengths**: Captures non-linear patterns, handles multiple features
+### LSTM Model
+- **Architecture**: 2 LSTM layers (64, 32 units) with dropout
+- **Optimizer**: Adam with early stopping
+- **Features**: MinMax scaling, sequence creation
+- **Strengths**: Captures complex patterns, handles non-linearity
 
-### Linear Regression Model
-- **Algorithm**: Linear Regression with feature engineering
-- **Features**: Same feature set as Random Forest
-- **Strengths**: Fast, interpretable, good baseline
+### ARIMA Model
+- **Method**: Automatic parameter selection (p, d, q)
+- **Stationarity**: Automatic differencing if needed
+- **Features**: AIC-based model selection
+- **Strengths**: Interpretable, handles trends and seasonality
 
 ## 🎯 Analysis Pipeline
 
 1. **Data Generation**: Create sample web traffic data with trend and seasonality
 2. **Data Visualization**: Plot time series and show statistics
 3. **Feature Engineering**: Create time-based features and lags
-4. **Model Training**: Train Random Forest and Linear Regression
+4. **Model Training**: Train LSTM and ARIMA models
 5. **Performance Comparison**: Calculate RMSE and show results
 6. **Visualization**: Display predictions vs actual values
 
 ## 📊 Expected Results
 
 The project typically shows that:
-- **Random Forest achieves lower RMSE** than Linear Regression
-- **Machine learning captures complex patterns** better than linear methods
+- **LSTM achieves lower RMSE** than ARIMA
+- **Deep learning captures complex patterns** better than statistical methods
 - **Feature engineering** significantly improves model performance
 
 ## 🛠️ Technical Requirements
 
 - Python 3.8+
+- TensorFlow 2.15+
+- Statsmodels 0.14+
 - Streamlit 1.37+
 - Pandas 2.2+
 - NumPy 1.26+

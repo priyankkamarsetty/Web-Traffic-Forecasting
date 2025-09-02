@@ -33,9 +33,8 @@ def run(data_path: str = CFG.DATA_PATH):
         # Train LSTM Model
         print("\n🧠 Training LSTM Model...")
         lstm_out = fit_lstm(train_y, test_y, CFG.TIME_STEPS)
-        lstm_train_true = train_y.iloc[lstm_out["time_steps"]:]
         lstm_train_pred = lstm_out["train_pred"]
-        lstm_rmse_train = rmse(lstm_train_true, lstm_train_pred)
+        lstm_rmse_train = rmse(train_y, lstm_train_pred)
         lstm_rmse_test  = rmse(test_y, lstm_out["test_pred"])
 
         # Train ARIMA Model
@@ -69,7 +68,7 @@ def run(data_path: str = CFG.DATA_PATH):
         df_all = df.copy()
         df_all["Model"] = "Actual"
 
-        lstm_train_dates = train_df["Date"].iloc[len(train_df)-len(lstm_train_true):].reset_index(drop=True)
+        lstm_train_dates = train_df["Date"].reset_index(drop=True)
         lstm_train = pd.DataFrame({"Date": lstm_train_dates, "Users": lstm_train_pred, "Model": "LSTM (train)"})
         lstm_test  = pd.DataFrame({"Date": test_df["Date"].reset_index(drop=True),
                                    "Users": lstm_out["test_pred"], "Model": "LSTM (test)"})

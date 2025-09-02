@@ -2,6 +2,7 @@ numpy>=1.26
 pandas>=2.2
 matplotlib>=3.9
 scikit-learn>=1.5
+tensorflow>=2.15
 statsmodels>=0.14
 plotly>=5.22
 streamlit>=1.37
